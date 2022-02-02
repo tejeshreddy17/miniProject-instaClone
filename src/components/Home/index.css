@@ -1,0 +1,18 @@
+.HomeBackground {
+  display: flex;
+  flex-direction: column;
+}
+.user-stories-container {
+  padding-left: 40px;
+  padding-right: 40px;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 0.5px solid #c6c6c8;
+  margin-bottom: 15px;
+  padding-bottom: 20px;
+}
+.slick-prev:before,
+.slick-next:before {
+  color: black;
+}
