@@ -52,6 +52,7 @@ const InstaPosts = props => {
               onClick={clickingUnlikeButton}
               type="button"
               className="like-comment-share un-like-button "
+              testid="unLikeIcon"
             >
               <FcLike />
             </button>
@@ -60,6 +61,7 @@ const InstaPosts = props => {
               onClick={clickingLikeButton}
               type="button"
               className="like-comment-share "
+              testid="likeIcon"
             >
               <BsHeart />
             </button>

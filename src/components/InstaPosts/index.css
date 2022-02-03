@@ -24,6 +24,14 @@
   display: flex;
   flex-direction: column;
   margin-bottom: 15px;
+  background-color: white;
+}
+@media screen and (min-width: 576px) {
+  .insta-post-container {
+    border: 1px solid #dbdbdb;
+    padding-top: 10px;
+    margin-bottom: 45px;
+  }
 }
 .link-style-profile {
   text-decoration: none;

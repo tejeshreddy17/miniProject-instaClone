@@ -18,6 +18,42 @@ class Home extends Component {
     this.gettingUserStories()
   }
 
+  searchingInput = async input => {
+    console.log(input)
+    this.setState({searchInput: input})
+    const token = Cookies.get('jwt_token')
+    const apiUrl = `https://apis.ccbp.in/insta-share/posts?search=${input}`
+    const options = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      method: 'GET',
+    }
+    const response = await fetch(apiUrl, options)
+    const data = await response.json()
+    // console.log(data)
+    const formattedData = data.posts.map(eachPost => ({
+      comments: eachPost.comments.map(eachComment => ({
+        username: eachComment.user_name,
+        comment: eachComment.comment,
+        userId: eachComment.user_id,
+      })),
+      createdAt: eachPost.created_at,
+      likesCount: eachPost.likes_count,
+      postDetails: {
+        caption: eachPost.post_details.caption,
+        imageUrl: eachPost.post_details.image_url,
+      },
+      postId: eachPost.post_id,
+      profilePic: eachPost.profile_pic,
+      userId: eachPost.user_id,
+      userName: eachPost.user_name,
+      likeStatus: false,
+    }))
+    // console.log(formattedData)
+    this.setState({homePosts: formattedData})
+  }
+
   gettingUserHomeDetails = async () => {
     const token = Cookies.get('jwt_token')
     const apiUrl = 'https://apis.ccbp.in/insta-share/posts'
@@ -141,7 +177,7 @@ class Home extends Component {
     }
     return (
       <div>
-        <Header />
+        <Header searchingInput={this.searchingInput} />
         <div className="HomeBackground">
           <div className="user-stories-container">
             <Slider {...settings}>
