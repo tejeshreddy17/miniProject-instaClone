@@ -1,6 +1,7 @@
 .HomeBackground {
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
 }
 @media screen and (min-width: 576px) {
   .HomeBackground {
@@ -35,4 +36,76 @@
 .slick-prev:before,
 .slick-next:before {
   color: black;
+}
+.loader-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.loader-container-home-posts {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  min-height: 80vh;
+}
+
+@media screen and (min-width: 576px) {
+  .home-page-post-container {
+    display: flex;
+    flex-direction: column;
+
+    margin-bottom: 45px;
+    min-height: 100vh;
+  }
+  .loader-container-home-posts {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    flex-grow: 1;
+    border: 1px solid #dbdbdb;
+    background-color: white;
+  }
+  .loader-container-search-home-posts {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    flex-grow: 1;
+    border: 1px solid #dbdbdb;
+    background-color: white;
+    margin-top: 35px;
+  }
+}
+
+.failure-view-image {
+  height: 48px;
+  width: 48px;
+}
+.failure-view-button {
+  background-color: #4094ef;
+  color: white;
+  width: 114px;
+  height: 32px;
+  padding: 8px 24px 8px 24px;
+  border: none;
+  font-size: 12px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.failure-view-description {
+  color: #262626;
+  font-size: 16px;
+  text-align: center;
 }

@@ -37,6 +37,11 @@ class Header extends Component {
     searchingInput(event.target.value)
   }
 
+  searching = () => {
+    const {onClickingSearchIcon} = this.props
+    onClickingSearchIcon()
+  }
+
   render() {
     const {hamburgerDispaly, searchbar} = this.state
     const {match} = this.props
@@ -71,7 +76,12 @@ class Header extends Component {
                   className="input-search-style"
                   type="search"
                 />
-                <button type="button" className="search-icon-search-bar">
+                <button
+                  testid="searchIcon"
+                  type="button"
+                  className="search-icon-search-bar"
+                  onClick={this.searching}
+                >
                   <FaSearch />
                 </button>
               </div>

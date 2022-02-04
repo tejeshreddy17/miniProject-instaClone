@@ -49,6 +49,8 @@
   font-family: Roboto;
   font-size: 18px;
   color: #262626;
+  margin-right: 25px;
+  flex-shrink: 0;
 }
 .hamburguer-menu {
   border: none;
@@ -148,6 +150,12 @@
   padding-left: 15px;
   outline: none;
 }
+@media screen and (min-width: 576px) {
+  .input-search-style {
+    width: 140px;
+  }
+}
+
 .search-icon-search-bar {
   background-color: #dbdbdb;
   font-size: 14px;

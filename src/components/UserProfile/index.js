@@ -73,7 +73,7 @@ class UserProfile extends Component {
       <div>
         <Header />
         <div className="bio-section">
-          <p className="user-profile-name">{userName}</p>
+          <h1 className="user-profile-name">{userName}</h1>
           <div className="user-profile-details">
             <img
               className="user-profile-pic"
@@ -146,13 +146,14 @@ class UserProfile extends Component {
           ))}
         </div>
         <div>
-          <p className="posts-bottom-section-heading">Posts</p>
+          <h1 className="posts-bottom-section-heading">Posts</h1>
           <div className="user-profile-post-container">
             {posts.map(eachPost => (
               <img
                 className="post-image-size"
                 alt="user post"
                 src={eachPost.image}
+                key={eachPost.id}
               />
             ))}
           </div>
