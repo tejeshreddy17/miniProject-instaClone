@@ -23,7 +23,6 @@ class Home extends Component {
     homePosts: [],
     userStories: [],
     searchInput: '',
-    finalSearchvalue: '',
     userStoriesLoadingStatus: apiStatusConstants.initial,
     homePagePostsLoadingStatus: apiStatusConstants.initial,
     searchApiStatus: apiStatusConstants.initial,
@@ -36,54 +35,63 @@ class Home extends Component {
   }
 
   onClickingSearchIcon = async () => {
-    this.setState({searchApiStatus: apiStatusConstants.loading})
+    this.setState({
+      searchApiStatus: apiStatusConstants.loading,
+      searchRequest: true,
+    })
     const token = Cookies.get('jwt_token')
     const {searchInput} = this.state
-    const apiUrl = `https://apis.ccbp.in/insta-share/posts?search=${searchInput}`
-    const options = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      method: 'GET',
-    }
-    const response = await fetch(apiUrl, options)
-    const data = await response.json()
-    // console.log(data)
-    if (response.ok === true) {
-      const formattedData = data.posts.map(eachPost => ({
-        comments: eachPost.comments.map(eachComment => ({
-          username: eachComment.user_name,
-          comment: eachComment.comment,
-          userId: eachComment.user_id,
-        })),
-        createdAt: eachPost.created_at,
-        likesCount: eachPost.likes_count,
-        postDetails: {
-          caption: eachPost.post_details.caption,
-          imageUrl: eachPost.post_details.image_url,
+    if (searchInput !== '') {
+      const apiUrl = `https://apis.ccbp.in/insta-share/posts?search=${searchInput}`
+      const options = {
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-        postId: eachPost.post_id,
-        profilePic: eachPost.profile_pic,
-        userId: eachPost.user_id,
-        userName: eachPost.user_name,
-        likeStatus: false,
-      }))
-      // console.log(formattedData)
-      this.setState({
-        homePosts: formattedData,
-        searchRequest: true,
-        searchApiStatus: apiStatusConstants.success,
-      })
+        method: 'GET',
+      }
+      const response = await fetch(apiUrl, options)
+      const data = await response.json()
+      // console.log(data)
+      if (response.ok === true) {
+        const formattedData = data.posts.map(eachPost => ({
+          comments: eachPost.comments.map(eachComment => ({
+            username: eachComment.user_name,
+            comment: eachComment.comment,
+            userId: eachComment.user_id,
+          })),
+          createdAt: eachPost.created_at,
+          likesCount: eachPost.likes_count,
+          postDetails: {
+            caption: eachPost.post_details.caption,
+            imageUrl: eachPost.post_details.image_url,
+          },
+          postId: eachPost.post_id,
+          profilePic: eachPost.profile_pic,
+          userId: eachPost.user_id,
+          userName: eachPost.user_name,
+          likeStatus: false,
+        }))
+        // console.log(formattedData)
+        this.setState({
+          homePosts: formattedData,
+
+          searchApiStatus: apiStatusConstants.success,
+        })
+      } else {
+        this.setState({searchApiStatus: apiStatusConstants.failure})
+      }
     }
   }
 
   searchingInput = async input => {
-    // console.log(input)
     this.setState({searchInput: input})
   }
 
   gettingUserHomeDetails = async () => {
-    this.setState({homePagePostsLoadingStatus: apiStatusConstants.loading})
+    this.setState({
+      homePagePostsLoadingStatus: apiStatusConstants.loading,
+      searchRequest: false,
+    })
     const token = Cookies.get('jwt_token')
     const apiUrl = 'https://apis.ccbp.in/insta-share/posts'
     const options = {
@@ -253,7 +261,7 @@ class Home extends Component {
       case apiStatusConstants.loading:
         return this.renderingLoader()
       case apiStatusConstants.failure:
-        return null
+        return this.renderingUserStoriesFailureView()
       case apiStatusConstants.success:
         return (
           <div className="user-stories-container">
@@ -279,16 +287,25 @@ class Home extends Component {
           </div>
         )
       case apiStatusConstants.failure:
-        return null
+        return this.renderingsearchFailureView()
       case apiStatusConstants.success:
-        return homePosts.map(eachPost => (
-          <InstaPosts
-            updatingLikeButton={this.updatingLikeButton}
-            updatingUnLikeButton={this.updatingUnLikeButton}
-            key={eachPost.postId}
-            eachPost={eachPost}
-          />
-        ))
+        if (homePosts.length === 0) {
+          return this.renderingSearchNotFound()
+        }
+        return (
+          <>
+            <h1>Search Results</h1>
+            {homePosts.map(eachPost => (
+              <InstaPosts
+                updatingLikeButton={this.updatingLikeButton}
+                updatingUnLikeButton={this.updatingUnLikeButton}
+                key={eachPost.postId}
+                eachPost={eachPost}
+              />
+            ))}
+          </>
+        )
+
       default:
         return null
     }
@@ -314,18 +331,74 @@ class Home extends Component {
     </div>
   )
 
+  renderingUserStoriesFailureView = () => (
+    <div className="loader-container-home-posts">
+      <img
+        className="failure-view-image"
+        src="https://res.cloudinary.com/tejeshreddy17/image/upload/v1643991735/alert-triangle_wwsh5r.jpg"
+        alt="failure view"
+      />
+      <p className="failure-view-description">
+        Something went wrong. Please try again
+      </p>
+      <button
+        className="failure-view-button"
+        onClick={this.gettingUserStories}
+        type="button"
+      >
+        Try again
+      </button>
+    </div>
+  )
+
+  renderingSearchNotFound = () => (
+    <div className="search-not-found-container">
+      <img
+        className="search-not-found-image"
+        alt="search not found"
+        src="https://res.cloudinary.com/tejeshreddy17/image/upload/v1644080071/Group_zk7ytr.jpg"
+      />
+      <h1 className="search-not-found-heading">Search Not Found</h1>
+      <p className="search-not-found-description">
+        Try different keyword or search again
+      </p>
+    </div>
+  )
+
+  renderingsearchFailureView = () => (
+    <div className="my-profile-failure-view">
+      <img
+        className="failure-view-image-my-profile"
+        src="https://res.cloudinary.com/tejeshreddy17/image/upload/v1643995483/Group_7522_rbojul.jpg"
+        alt="failure view"
+      />
+      <p className="failure-view-description">
+        Something went wrong. Please try again
+      </p>
+      <button
+        className="failure-view-button"
+        onClick={this.onClickingSearchIcon}
+        type="button"
+      >
+        Try again
+      </button>
+    </div>
+  )
+
+  onrefreshingHome = () => {
+    this.gettingUserHomeDetails()
+    this.gettingUserStories()
+  }
+
   render() {
-    const {userStories, homePosts, searchRequest} = this.state
+    const {searchRequest} = this.state
     // console.log(homePosts)
-    const settings = {
-      dots: false,
-      slidesToShow: 3,
-      slidesToScroll: 1,
-      infinite: false,
-    }
+
+    // console.log(searchRequest)
     return (
       <div>
         <Header
+          onrefreshingHome={this.onrefreshingHome}
           searchingInput={this.searchingInput}
           onClickingSearchIcon={this.onClickingSearchIcon}
         />
@@ -338,7 +411,7 @@ class Home extends Component {
               </div>
             </>
           )}
-          {searchRequest && this.renderingSearchResults()}
+          {searchRequest && <>{this.renderingSearchResults()}</>}
         </div>
       </div>
     )

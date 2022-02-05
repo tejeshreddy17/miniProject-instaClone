@@ -109,3 +109,46 @@
   font-size: 16px;
   text-align: center;
 }
+.search-not-found-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: white;
+}
+.search-not-found-image {
+  width: 258px;
+  height: 210px;
+}
+.search-not-found-heading {
+  color: #262626;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 32px;
+  margin-bottom: 10px;
+}
+.search-not-found-description {
+  margin-top: 0px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  color: #262626;
+}
+@media screen and (min-width: 576px) {
+  .search-not-found-image {
+    width: 500px;
+    height: 409px;
+  }
+  .search-not-found-heading {
+    font-size: 32px;
+  }
+  .search-not-found-description {
+    font-size: 20px;
+    margin-top: 10px;
+  }
+}

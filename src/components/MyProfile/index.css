@@ -73,6 +73,7 @@
   flex-wrap: wrap;
   flex-grow: 1;
   padding-bottom: 20px;
+  padding-left: 0px;
 }
 .user-profile-story-pic {
   height: 64px;
@@ -96,6 +97,7 @@
   flex-wrap: wrap;
   justify-content: space-between;
   padding-bottom: 15px;
+  padding-left: 0px;
 }
 .stories-large-devices {
   display: none;
@@ -256,4 +258,7 @@
     width: 560px;
     height: 274px;
   }
+}
+.li-style {
+  list-style-type: none;
 }

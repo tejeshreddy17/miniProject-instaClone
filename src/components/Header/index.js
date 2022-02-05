@@ -1,5 +1,5 @@
 import {Component} from 'react'
-import {Link, withRouter, Redirect} from 'react-router-dom'
+import {Link, withRouter} from 'react-router-dom'
 import Cookies from 'js-cookie'
 import './index.css'
 import {GiHamburgerMenu} from 'react-icons/gi'
@@ -12,7 +12,7 @@ class Header extends Component {
   state = {hamburgerDispaly: false, searchbar: false}
 
   onclickingMenu = () => {
-    this.setState(prevState => ({hamburgerDispaly: true}))
+    this.setState({hamburgerDispaly: true})
     // console.log(this.props)
   }
 
@@ -40,6 +40,11 @@ class Header extends Component {
   searching = () => {
     const {onClickingSearchIcon} = this.props
     onClickingSearchIcon()
+  }
+
+  refreshingHome = () => {
+    const {onrefreshingHome} = this.props
+    onrefreshingHome()
   }
 
   render() {
@@ -87,6 +92,7 @@ class Header extends Component {
               </div>
               <Link className="link-cont" to="/">
                 <button
+                  onClick={this.refreshingHome}
                   type="button"
                   className={
                     path === '/'
@@ -143,7 +149,6 @@ class Header extends Component {
               </button>
               <Link className="link-cont" to="/my-profile">
                 <button type="button" className="home-profile ">
-                  {' '}
                   Profile
                 </button>
               </Link>
@@ -170,7 +175,14 @@ class Header extends Component {
                   className="input-search-style"
                   type="search"
                 />
-                <FaSearch />
+                <button
+                  testid="searchIcon"
+                  type="button"
+                  className="search-icon-search-bar"
+                  onClick={this.searching}
+                >
+                  <FaSearch />
+                </button>
               </div>
             )}
           </div>

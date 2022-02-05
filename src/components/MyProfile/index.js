@@ -1,6 +1,8 @@
 import {Component} from 'react'
 import Cookies from 'js-cookie'
 import Loader from 'react-loader-spinner'
+import {BsGrid3X3} from 'react-icons/bs'
+import {BiCamera} from 'react-icons/bi'
 import Header from '../Header'
 import './index.css'
 // https://apis.ccbp.in/insta-share/users/{userId}
@@ -60,7 +62,7 @@ class UserProfile extends Component {
         userId: data.profile.user_id,
         userName: data.profile.user_name,
       }
-      console.log(formattedData)
+      // console.log(formattedData)
       this.setState({
         userDetails: formattedData,
         loadingStatus: apiStatusConstants.success,
@@ -89,6 +91,7 @@ class UserProfile extends Component {
       userBio,
       stories,
     } = userDetails
+
     return (
       <>
         <div className="bio-section">
@@ -119,66 +122,41 @@ class UserProfile extends Component {
           <p className="bio-style">{userBio}</p>
           <ul className="user-profile-story-container">
             {stories.map(eachStory => (
-              <li>
+              <li key={eachStory.id} className="li-style">
                 <img
                   className="user-profile-story-pic"
                   alt="my story"
-                  key={eachStory.id}
                   src={eachStory.image}
                 />
               </li>
             ))}
           </ul>
         </div>
-        <div className="bio-section-large-devices">
-          <img className="user-profile-pic" alt="my profile" src={profilePic} />
-          <div>
-            <p className="user-profile-name">{userName}</p>
-            <div className="posts-followers-container">
-              <div className="details-container">
-                <p className="posts-heading">{postsCount}</p>
-                <p className="posts-subheading">posts</p>
-              </div>
-              <div className="details-container">
-                <p className="posts-heading">{followersCount}</p>
-                <p className="posts-subheading">followers</p>
-              </div>
-              <div className="details-container">
-                <p className="posts-heading">{followingCount}</p>
-                <p className="posts-subheading">following</p>
-              </div>
-            </div>
-            <p className="userid-style">{userId}</p>
-            <p className="bio-style">{userBio}</p>
-          </div>
-        </div>
-        <ul className="stories-large-devices">
-          {stories.map(eachStory => (
-            <li>
-              <img
-                className="user-profile-story-pic"
-                alt="my story"
-                key={eachStory.id}
-                src={eachStory.image}
-              />
-            </li>
-          ))}
-        </ul>
         <div>
-          <h1 className="posts-bottom-section-heading">Posts</h1>
-          <ul className="user-profile-post-container">
-            {posts.map(eachPost => (
-              <li>
-                <img
-                  className="post-image-size"
-                  alt="my post"
-                  src={eachPost.image}
-                  key={eachPost.id}
-                />
-              </li>
-            ))}
-          </ul>
+          <h1 className="posts-bottom-section-heading">
+            <BsGrid3X3 />
+            Posts
+          </h1>
+          {postsCount === 0 ? (
+            <div>
+              <BiCamera />
+              <h1>No Posts</h1>
+            </div>
+          ) : (
+            <ul className="user-profile-post-container">
+              {posts.map(eachPost => (
+                <li key={eachPost.id} className="li-style">
+                  <img
+                    className="post-image-size"
+                    alt="my post"
+                    src={eachPost.image}
+                  />
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
+        )
       </>
     )
   }
