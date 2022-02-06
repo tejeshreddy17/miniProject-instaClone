@@ -102,20 +102,24 @@ class UserProfile extends Component {
               alt="my profile"
               src={profilePic}
             />
-
-            <div className="posts-followers-container">
-              <div className="details-container">
-                <p className="posts-heading">{postsCount}</p>
-                <p className="posts-subheading">posts</p>
+            <div className="bio-section-details-container">
+              <h1 className="user-profile-name-large-devices">{userName}</h1>
+              <div className="posts-followers-container">
+                <div className="details-container">
+                  <p className="posts-heading">{postsCount}</p>
+                  <p className="posts-subheading">posts</p>
+                </div>
+                <div className="details-container">
+                  <p className="posts-heading">{followersCount}</p>
+                  <p className="posts-subheading">followers</p>
+                </div>
+                <div className="details-container">
+                  <p className="posts-heading">{followingCount}</p>
+                  <p className="posts-subheading">following</p>
+                </div>
               </div>
-              <div className="details-container">
-                <p className="posts-heading">{followersCount}</p>
-                <p className="posts-subheading">followers</p>
-              </div>
-              <div className="details-container">
-                <p className="posts-heading">{followingCount}</p>
-                <p className="posts-subheading">following</p>
-              </div>
+              <p className="userid-style-large-devices">{userId}</p>
+              <p className="bio-style-large-devices">{userBio}</p>
             </div>
           </div>
           <p className="userid-style">{userId}</p>
@@ -133,10 +137,10 @@ class UserProfile extends Component {
           </ul>
         </div>
         <div>
-          <h1 className="posts-bottom-section-heading">
+          <div className="posts-heading-icon-container">
             <BsGrid3X3 />
-            Posts
-          </h1>
+            <h1 className="posts-bottom-section-heading">Posts</h1>
+          </div>
           {postsCount === 0 ? (
             <div>
               <BiCamera />

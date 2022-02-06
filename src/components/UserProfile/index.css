@@ -149,6 +149,7 @@
   .user-profile-name {
     font-size: 32px;
     margin-bottom: 15px;
+    display: none;
   }
 }
 .posts-heading {
@@ -212,6 +213,12 @@
     font-size: 16px;
   }
 }
+.posts-heading-icon-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
 
 .posts-bottom-section-heading {
   font-family: Roboto;
@@ -219,14 +226,15 @@
   font-weight: 500;
   font-size: 24px;
   line-height: 32px;
+  margin-left: 15px;
 }
 @media screen and (min-width: 576px) {
-  .posts-bottom-section-heading {
+  .posts-heading-icon-container {
     margin-left: 5%;
   }
 }
 @media screen and (min-width: 768px) {
-  .posts-bottom-section-heading {
+  .posts-heading-icon-container {
     margin-left: 10%;
   }
 }

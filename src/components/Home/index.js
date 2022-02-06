@@ -144,7 +144,7 @@ class Home extends Component {
     }
     const response = await fetch(apiUrl, options)
     const data = await response.json()
-    // console.log(data)
+    console.log(data)
     if (response.ok === true) {
       const formattedData = data.users_stories.map(eachStory => ({
         storyUrl: eachStory.story_url,

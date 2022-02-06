@@ -92,7 +92,6 @@ class Header extends Component {
               </div>
               <Link className="link-cont" to="/">
                 <button
-                  onClick={this.refreshingHome}
                   type="button"
                   className={
                     path === '/'

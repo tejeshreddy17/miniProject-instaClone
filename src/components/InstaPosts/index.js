@@ -31,7 +31,7 @@ const InstaPosts = props => {
     updatingUnLikeButton(postId)
   }
   return (
-    <div className="insta-post-container">
+    <li className="insta-post-container">
       <div className="profile-pic-container">
         <div className="profile-pic-design">
           <img
@@ -86,7 +86,7 @@ const InstaPosts = props => {
         ))}
         <p className="created-time">{createdAt}</p>
       </div>
-    </div>
+    </li>
   )
 }
 

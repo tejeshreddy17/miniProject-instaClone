@@ -7,7 +7,6 @@
 @media screen and (min-width: 576px) {
   .bio-section {
     padding: 10px 5% 10px 5%;
-    display: none;
   }
 }
 @media screen and (min-width: 768px) {
@@ -140,17 +139,30 @@
     width: 300px;
   }
 }
-
+.bio-section-details-container {
+  flex-grow: 1;
+}
 .user-profile-name {
   font-weight: 300;
   font-family: roboto;
   font-size: 16px;
   color: #262626;
 }
+.user-profile-name-large-devices {
+  font-size: 32px;
+  margin-bottom: 15px;
+  display: none;
+}
 @media screen and (min-width: 576px) {
   .user-profile-name {
+    display: none;
+  }
+  .user-profile-name-large-devices {
     font-size: 32px;
     margin-bottom: 15px;
+    display: flex;
+    font-weight: 300;
+    font-family: roboto;
   }
 }
 .posts-heading {
@@ -209,29 +221,37 @@
   line-height: 24px;
   color: #262626;
 }
+.userid-style-large-devices {
+  display: none;
+}
+.bio-style-large-devices {
+  display: none;
+}
 @media screen and (min-width: 576px) {
   .bio-style {
+    display: none;
+  }
+  .userid-style {
+    display: none;
+  }
+  .userid-style-large-devices {
+    font-weight: 500;
+    font-family: roboto;
     font-size: 16px;
+    color: #262626;
+    display: flex;
+  }
+  .bio-style-large-devices {
+    display: flex;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #262626;
   }
 }
 
-.posts-bottom-section-heading {
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 24px;
-  line-height: 32px;
-}
-@media screen and (min-width: 576px) {
-  .posts-bottom-section-heading {
-    margin-left: 5%;
-  }
-}
-@media screen and (min-width: 768px) {
-  .posts-bottom-section-heading {
-    margin-left: 10%;
-  }
-}
 .myprofile-loader-container {
   min-height: 100vh;
   display: flex;
