@@ -7,7 +7,6 @@ import {BiCamera} from 'react-icons/bi'
 import Header from '../Header'
 
 import './index.css'
-// https://apis.ccbp.in/insta-share/users/{userId}
 
 const apiStatusConstants = {
   initial: 'initial',
@@ -31,6 +30,7 @@ class UserProfile extends Component {
       userName: '',
     },
     loadingStatus: apiStatusConstants.initial,
+    presentScreenSize: window.innerWidth,
   }
 
   componentDidMount() {
@@ -42,7 +42,7 @@ class UserProfile extends Component {
     const {match} = this.props
     const {params} = match
     const {id} = params
-    const apiUrl = ` https://apis.ccbp.in/insta-share/users/${id}`
+    const apiUrl = `https://apis.ccbp.in/insta-share/users/${id}`
     const token = Cookies.get('jwt_token')
 
     const options = {
@@ -83,12 +83,11 @@ class UserProfile extends Component {
     </div>
   )
 
-  renderingContent = () => {
-    const {userDetails} = this.state
+  renderingBioSection = () => {
+    const {userDetails, presentScreenSize} = this.state
     const {
       followersCount,
       followingCount,
-      posts,
       postsCount,
       userId,
       userName,
@@ -96,10 +95,9 @@ class UserProfile extends Component {
       userBio,
       stories,
     } = userDetails
-    return (
-      <>
+    if (presentScreenSize > 576) {
+      return (
         <div className="bio-section">
-          <h1 className="user-profile-name">{userName}</h1>
           <div className="user-profile-details">
             <img
               className="user-profile-pic"
@@ -126,8 +124,7 @@ class UserProfile extends Component {
               <p className="bio-style-large-devices">{userBio}</p>
             </div>
           </div>
-          <p className="userid-style">{userId}</p>
-          <p className="bio-style">{userBio}</p>
+
           <ul className="user-profile-story-container">
             {stories.map(eachStory => (
               <li className="li-style" key={eachStory.id}>
@@ -140,16 +137,67 @@ class UserProfile extends Component {
             ))}
           </ul>
         </div>
+      )
+    }
+    return (
+      <div className="bio-section">
+        <h1 className="user-profile-name">{userName}</h1>
+        <div className="user-profile-details">
+          <img
+            className="user-profile-pic"
+            alt="user profile"
+            src={profilePic}
+          />
+          <div className="bio-section-details-container">
+            <div className="posts-followers-container">
+              <div className="details-container">
+                <p className="posts-heading">{postsCount}</p>
+                <p className="posts-subheading">posts</p>
+              </div>
+              <div className="details-container">
+                <p className="posts-heading">{followersCount}</p>
+                <p className="posts-subheading">followers</p>
+              </div>
+              <div className="details-container">
+                <p className="posts-heading">{followingCount}</p>
+                <p className="posts-subheading">following</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p className="userid-style">{userId}</p>
+        <p className="bio-style">{userBio}</p>
+        <ul className="user-profile-story-container">
+          {stories.map(eachStory => (
+            <li className="li-style" key={eachStory.id}>
+              <img
+                className="user-profile-story-pic"
+                alt="user story"
+                src={eachStory.image}
+              />
+            </li>
+          ))}
+        </ul>
+      </div>
+    )
+  }
+
+  renderingContent = () => {
+    const {userDetails} = this.state
+    const {posts} = userDetails
+    return (
+      <>
+        {this.renderingBioSection()}
         <div>
           <div className="posts-heading-icon-container">
             <BsGrid3X3 />
             <h1 className="posts-bottom-section-heading">Posts</h1>
           </div>
 
-          {postsCount === 0 ? (
-            <div>
+          {posts.length === 0 ? (
+            <div className="no-posts-style">
               <BiCamera />
-              <h1>No Posts</h1>
+              <h1 className="no-posts-heading-style">No Posts</h1>
             </div>
           ) : (
             <ul className="user-profile-post-container">
@@ -204,11 +252,16 @@ class UserProfile extends Component {
     }
   }
 
+  checking = () => {
+    this.setState({presentScreenSize: window.innerWidth})
+  }
+
   render() {
     return (
       <div>
         <Header />
         {this.renderingPage()}
+        {window.addEventListener('resize', this.checking)}
       </div>
     )
   }

@@ -28,6 +28,7 @@ class UserProfile extends Component {
       userName: '',
     },
     loadingStatus: apiStatusConstants.initial,
+    presentScreenSize: window.innerWidth,
   }
 
   componentDidMount() {
@@ -78,12 +79,11 @@ class UserProfile extends Component {
     </div>
   )
 
-  renderingContent = () => {
-    const {userDetails} = this.state
+  renderngBioSection = () => {
+    const {userDetails, presentScreenSize} = this.state
     const {
       followersCount,
       followingCount,
-      posts,
       postsCount,
       userId,
       userName,
@@ -91,11 +91,9 @@ class UserProfile extends Component {
       userBio,
       stories,
     } = userDetails
-
-    return (
-      <>
+    if (presentScreenSize > 576) {
+      return (
         <div className="bio-section">
-          <h1 className="user-profile-name">{userName}</h1>
           <div className="user-profile-details">
             <img
               className="user-profile-pic"
@@ -122,8 +120,7 @@ class UserProfile extends Component {
               <p className="bio-style-large-devices">{userBio}</p>
             </div>
           </div>
-          <p className="userid-style">{userId}</p>
-          <p className="bio-style">{userBio}</p>
+
           <ul className="user-profile-story-container">
             {stories.map(eachStory => (
               <li key={eachStory.id} className="li-style">
@@ -136,12 +133,60 @@ class UserProfile extends Component {
             ))}
           </ul>
         </div>
+      )
+    }
+    return (
+      <div className="bio-section">
+        <h1 className="user-profile-name">{userName}</h1>
+        <div className="user-profile-details">
+          <img className="user-profile-pic" alt="my profile" src={profilePic} />
+          <div className="bio-section-details-container">
+            <div className="posts-followers-container">
+              <div className="details-container">
+                <p className="posts-heading">{postsCount}</p>
+                <p className="posts-subheading">posts</p>
+              </div>
+              <div className="details-container">
+                <p className="posts-heading">{followersCount}</p>
+                <p className="posts-subheading">followers</p>
+              </div>
+              <div className="details-container">
+                <p className="posts-heading">{followingCount}</p>
+                <p className="posts-subheading">following</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p className="userid-style">{userId}</p>
+        <p className="bio-style">{userBio}</p>
+        <ul className="user-profile-story-container">
+          {stories.map(eachStory => (
+            <li key={eachStory.id} className="li-style">
+              <img
+                className="user-profile-story-pic"
+                alt="my story"
+                src={eachStory.image}
+              />
+            </li>
+          ))}
+        </ul>
+      </div>
+    )
+  }
+
+  renderingContent = () => {
+    const {userDetails} = this.state
+    const {posts} = userDetails
+
+    return (
+      <>
+        {this.renderngBioSection()}
         <div>
           <div className="posts-heading-icon-container">
             <BsGrid3X3 />
             <h1 className="posts-bottom-section-heading">Posts</h1>
           </div>
-          {postsCount === 0 ? (
+          {posts.length === 0 ? (
             <div>
               <BiCamera />
               <h1>No Posts</h1>
@@ -199,11 +244,16 @@ class UserProfile extends Component {
     </div>
   )
 
+  checking = () => {
+    this.setState({presentScreenSize: window.innerWidth})
+  }
+
   render() {
     return (
       <div>
         <Header />
         {this.renderingPage()}
+        {window.addEventListener('resize', this.checking)}
       </div>
     )
   }

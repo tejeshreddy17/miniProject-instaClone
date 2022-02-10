@@ -226,7 +226,10 @@
   font-weight: 500;
   font-size: 24px;
   line-height: 32px;
-  margin-left: 15px;
+  margin-left: 10px;
+}
+.posts-heading-icon-container {
+  margin-left: 20px;
 }
 @media screen and (min-width: 576px) {
   .posts-heading-icon-container {
@@ -237,4 +240,12 @@
   .posts-heading-icon-container {
     margin-left: 10%;
   }
+}
+
+.no-posts-style {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 30vh;
 }

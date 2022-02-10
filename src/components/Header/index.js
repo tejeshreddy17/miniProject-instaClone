@@ -9,7 +9,11 @@ import {AiFillCloseCircle} from 'react-icons/ai'
 import {FaSearch} from 'react-icons/fa'
 
 class Header extends Component {
-  state = {hamburgerDispaly: false, searchbar: false}
+  state = {
+    hamburgerDispaly: false,
+    searchbar: false,
+    presentScreenSize: window.innerWidth,
+  }
 
   onclickingMenu = () => {
     this.setState({hamburgerDispaly: true})
@@ -47,6 +51,10 @@ class Header extends Component {
     onrefreshingHome()
   }
 
+  checking = () => {
+    this.setState({presentScreenSize: window.innerWidth})
+  }
+
   render() {
     const {hamburgerDispaly, searchbar} = this.state
     const {match} = this.props
@@ -54,7 +62,7 @@ class Header extends Component {
 
     return (
       <nav className="header-style">
-        <div className="top-header-section">
+        <ul className="top-header-section">
           <div className="logo-heading-container">
             <Link className="Link-cont" to="/">
               <img
@@ -72,7 +80,7 @@ class Header extends Component {
           >
             <GiHamburgerMenu />
           </button>
-          <div className="menu-section-large-view">
+          <ul className="menu-section-large-view">
             <div className="menu-section-top">
               <div className="search-bar">
                 <input
@@ -122,10 +130,10 @@ class Header extends Component {
                 Logout
               </button>
             </div>
-          </div>
-        </div>
-        {hamburgerDispaly && (
-          <div className="menu-section">
+          </ul>
+        </ul>
+        {hamburgerDispaly && window.innerWidth < 576 && (
+          <ul className="menu-section">
             <div className="menu-section-top">
               <Link className="link-cont" to="/">
                 <button
@@ -184,8 +192,9 @@ class Header extends Component {
                 </button>
               </div>
             )}
-          </div>
+          </ul>
         )}
+        {window.addEventListener('resize', this.checking)}
       </nav>
     )
   }

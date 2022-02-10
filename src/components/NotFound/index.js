@@ -3,7 +3,7 @@ import Header from '../Header'
 
 import './index.css'
 
-const Notfound = () => (
+const NotFound = () => (
   <div>
     <Header />
     <div className="not-found-page">
@@ -26,4 +26,4 @@ const Notfound = () => (
   </div>
 )
 
-export default Notfound
+export default NotFound

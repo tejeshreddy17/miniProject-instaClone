@@ -253,9 +253,33 @@ class Home extends Component {
     const {userStoriesLoadingStatus, userStories} = this.state
     const settings = {
       dots: false,
-      slidesToShow: 3,
-      slidesToScroll: 1,
       infinite: false,
+      speed: 500,
+      slidesToShow: 4,
+      slidesToScroll: 1,
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 4,
+            slidesToScroll: 1,
+          },
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 1,
+          },
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 1,
+          },
+        },
+      ],
     }
     switch (userStoriesLoadingStatus) {
       case apiStatusConstants.loading:
@@ -264,13 +288,13 @@ class Home extends Component {
         return this.renderingUserStoriesFailureView()
       case apiStatusConstants.success:
         return (
-          <div className="user-stories-container">
+          <ul className="user-stories-container">
             <Slider {...settings}>
               {userStories.map(eachStory => (
                 <UserStories key={eachStory.userId} story={eachStory} />
               ))}
             </Slider>
-          </div>
+          </ul>
         )
       default:
         return null
@@ -406,9 +430,9 @@ class Home extends Component {
           {!searchRequest && (
             <>
               {this.renderingHomePageStoreis()}
-              <div className="home-page-post-container">
+              <ul className="home-page-post-container">
                 {this.renderingHomePosts()}
-              </div>
+              </ul>
             </>
           )}
           {searchRequest && <>{this.renderingSearchResults()}</>}
