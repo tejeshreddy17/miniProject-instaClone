@@ -71,7 +71,6 @@
   justify-content: flex-start;
   flex-wrap: wrap;
   flex-grow: 1;
-  padding-bottom: 20px;
   padding-left: 0px;
 }
 .user-profile-story-pic {
@@ -104,7 +103,7 @@
 @media screen and (min-width: 576px) {
   .user-profile-post-container {
     padding: 10px 5% 10px 5%;
-    justify-content: flex-start;
+    justify-content: space-between;
   }
   .stories-large-devices {
     display: flex;
@@ -113,7 +112,6 @@
 }
 @media screen and (min-width: 768px) {
   .user-profile-post-container {
-    display: flex;
     padding: 10px 10% 10px 10%;
   }
   .stories-large-devices {
@@ -123,20 +121,25 @@
 }
 .post-image-size {
   height: 118px;
-  width: 118px;
+  width: 100%;
   margin-bottom: 15px;
 }
 @media screen and (min-width: 576px) {
   .post-image-size {
-    height: 200px;
-    width: 200px;
-    margin-right: 15px;
+    height: 220px;
+    width: 100%;
+  }
+}
+@media screen and (min-width: 768px) {
+  .post-image-size {
+    height: 250px;
+    width: 100%;
   }
 }
 @media screen and (min-width: 768px) {
   .post-image-size {
     height: 300px;
-    width: 300px;
+    width: 100%;
   }
 }
 .bio-section-details-container {
@@ -281,4 +284,9 @@
 }
 .li-style {
   list-style-type: none;
+}
+
+.post-image-container {
+  list-style-type: none;
+  width: 33%;
 }

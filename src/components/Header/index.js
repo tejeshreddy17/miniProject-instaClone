@@ -12,7 +12,6 @@ class Header extends Component {
   state = {
     hamburgerDispaly: false,
     searchbar: false,
-    presentScreenSize: window.innerWidth,
   }
 
   onclickingMenu = () => {
@@ -38,12 +37,17 @@ class Header extends Component {
 
   onSearching = event => {
     const {searchingInput} = this.props
+
     searchingInput(event.target.value)
   }
 
   searching = () => {
     const {onClickingSearchIcon} = this.props
-    onClickingSearchIcon()
+    const {match} = this.props
+    const {path} = match
+    if (path === '/') {
+      onClickingSearchIcon()
+    }
   }
 
   refreshingHome = () => {
@@ -51,13 +55,9 @@ class Header extends Component {
     onrefreshingHome()
   }
 
-  checking = () => {
-    this.setState({presentScreenSize: window.innerWidth})
-  }
-
   render() {
     const {hamburgerDispaly, searchbar} = this.state
-    const {match} = this.props
+    const {match, searchInput} = this.props
     const {path} = match
 
     return (
@@ -88,6 +88,7 @@ class Header extends Component {
                   onChange={this.onSearching}
                   className="input-search-style"
                   type="search"
+                  value={searchInput}
                 />
                 <button
                   testid="searchIcon"
@@ -181,6 +182,7 @@ class Header extends Component {
                   onChange={this.onSearching}
                   className="input-search-style"
                   type="search"
+                  value={searchInput}
                 />
                 <button
                   testid="searchIcon"

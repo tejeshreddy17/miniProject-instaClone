@@ -13,15 +13,18 @@ body {
   .login-page-background {
     flex-direction: row;
     justify-content: space-around;
+    padding: 75px;
   }
 }
 .landing-image {
   display: none;
 }
-@media screen and (min-width: 576px) {
+
+@media screen and (min-width: 768px) {
   .landing-image {
     display: block;
-    width: 582px;
+    width: 56%;
+    max-width: 582px;
     height: 373px;
   }
 }
@@ -32,8 +35,30 @@ body {
   justify-content: center;
   padding: 10px 20px 10px 20px;
   width: 100%;
+  flex-shrink: 0;
 }
 @media screen and (min-width: 576px) {
+  .login-input-details {
+    box-shadow: 0px 8px 40px rgba(7, 7, 7, 0.08);
+    align-self: center;
+    height: 408px;
+    width: 356px;
+    padding-left: 28px;
+    padding-right: 28px;
+    margin-left: 25px;
+  }
+}
+@media screen and (min-width: 992px) {
+  .login-input-details {
+    box-shadow: 0px 8px 40px rgba(7, 7, 7, 0.08);
+    align-self: center;
+    height: 408px;
+    width: 356px;
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+}
+@media screen and (min-width: 992px) {
   .login-input-details {
     box-shadow: 0px 8px 40px rgba(7, 7, 7, 0.08);
     align-self: center;
@@ -43,6 +68,7 @@ body {
     padding-right: 48px;
   }
 }
+
 .login-logo-style {
   height: 40px;
   width: 78px;

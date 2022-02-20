@@ -10,7 +10,7 @@ const NotFound = () => (
       <img
         className="not-found-image"
         src="https://res.cloudinary.com/tejeshreddy17/image/upload/v1643982018/erroring_1_lyci8b.jpg"
-        alt="not found"
+        alt="page not found"
       />
       <h1 className="not-found-heading">Page Not Found</h1>
       <p className="not-found-description">

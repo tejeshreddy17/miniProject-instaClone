@@ -44,7 +44,7 @@ const InstaPosts = props => {
           <p className="profile-name">{userName}</p>
         </Link>
       </div>
-      <img alt="post" src={imageUrl} />
+      <img className="post-image" alt="post" src={imageUrl} />
       <div className="bottom-section">
         <div className="buttons-container">
           {likeStatus ? (

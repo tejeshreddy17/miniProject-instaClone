@@ -186,7 +186,7 @@ class UserProfile extends Component {
     const {userDetails} = this.state
     const {posts} = userDetails
     return (
-      <>
+      <div className="user-profile-background">
         {this.renderingBioSection()}
         <div>
           <div className="posts-heading-icon-container">
@@ -196,13 +196,13 @@ class UserProfile extends Component {
 
           {posts.length === 0 ? (
             <div className="no-posts-style">
-              <BiCamera />
+              <BiCamera className="camera-icon" />
               <h1 className="no-posts-heading-style">No Posts</h1>
             </div>
           ) : (
             <ul className="user-profile-post-container">
               {posts.map(eachPost => (
-                <li key={eachPost.id} className="li-style">
+                <li key={eachPost.id} className="post-image-container">
                   <img
                     className="post-image-size"
                     alt="user post"
@@ -213,8 +213,7 @@ class UserProfile extends Component {
             </ul>
           )}
         </div>
-        )
-      </>
+      </div>
     )
   }
 

@@ -21,7 +21,8 @@
   align-items: center;
   width: 100%;
   justify-content: space-between;
-  padding-left: 0px;
+  padding: 5px 0px 5px 0px;
+  margin: 0px;
 }
 .logo-heading-container {
   display: flex;
@@ -60,6 +61,7 @@
   margin-top: 0px;
   margin-bottom: 0px;
   cursor: pointer;
+  padding-right: 0px;
 }
 @media screen and (min-width: 576px) {
   .hamburguer-menu {
@@ -74,6 +76,7 @@
   justify-content: space-between;
   padding-left: 0px;
   margin-top: 0px;
+  margin-bottom: 5px;
 }
 .menu-section-large-view {
   display: none;

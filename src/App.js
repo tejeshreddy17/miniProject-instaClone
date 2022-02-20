@@ -11,7 +11,11 @@ import './App.css'
 const App = () => (
   <Switch>
     <Route exact path="/login" component={LoginPage} />
-    <ProtectedRoute exact path="/" component={Home} />
+    <ProtectedRoute
+      exact
+      path="/"
+      render={props => <Home key={Math.random()} {...props} />}
+    />
     <ProtectedRoute exact path="/users/:id" component={UserProfile} />
     <ProtectedRoute exact path="/my-profile" component={MyProfile} />
     <NotFound />

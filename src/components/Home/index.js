@@ -35,13 +35,13 @@ class Home extends Component {
   }
 
   onClickingSearchIcon = async () => {
-    this.setState({
-      searchApiStatus: apiStatusConstants.loading,
-      searchRequest: true,
-    })
     const token = Cookies.get('jwt_token')
     const {searchInput} = this.state
     if (searchInput !== '') {
+      this.setState({
+        searchApiStatus: apiStatusConstants.loading,
+        searchRequest: true,
+      })
       const apiUrl = `https://apis.ccbp.in/insta-share/posts?search=${searchInput}`
       const options = {
         headers: {
@@ -83,7 +83,7 @@ class Home extends Component {
     }
   }
 
-  searchingInput = async input => {
+  searchingInput = input => {
     this.setState({searchInput: input})
   }
 
@@ -318,7 +318,7 @@ class Home extends Component {
         }
         return (
           <>
-            <h1>Search Results</h1>
+            <h1 className="search-results-heading">Search Results</h1>
             {homePosts.map(eachPost => (
               <InstaPosts
                 updatingLikeButton={this.updatingLikeButton}
@@ -415,7 +415,7 @@ class Home extends Component {
   }
 
   render() {
-    const {searchRequest} = this.state
+    const {searchRequest, searchInput} = this.state
     // console.log(homePosts)
 
     // console.log(searchRequest)
@@ -425,6 +425,7 @@ class Home extends Component {
           onrefreshingHome={this.onrefreshingHome}
           searchingInput={this.searchingInput}
           onClickingSearchIcon={this.onClickingSearchIcon}
+          searchInput={searchInput}
         />
         <div className="HomeBackground">
           {!searchRequest && (
